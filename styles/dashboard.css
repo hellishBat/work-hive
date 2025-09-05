@@ -1,0 +1,38 @@
+/* Dashboard Styles */
+.btn-base {
+  @apply rounded-md font-medium transition;
+}
+.btn-primary {
+  @apply bg-teal-500 text-black hover:bg-teal-400;
+}
+.btn-ghost {
+  @apply bg-transparent text-teal-400 hover:bg-gray-800;
+}
+.btn-sm {
+  @apply px-2 py-1 text-sm;
+}
+.btn-md {
+  @apply px-4 py-2 text-base;
+}
+.btn-lg {
+  @apply px-6 py-3 text-lg;
+}
+
+.card-base {
+  @apply rounded-md shadow-md p-4 bg-gray-900 text-gray-200;
+}
+.card-outlined {
+  @apply rounded-md border border-gray-800 p-4 bg-gray-950 text-gray-200;
+}
+
+.grid-dashboard {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+}
+
+.text-teal {
+  @apply text-teal-400;
+}
+
+.input-base {
+  @apply p-2 rounded-md bg-gray-800 text-gray-200;
+}
