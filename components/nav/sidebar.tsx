@@ -22,7 +22,7 @@ export const Sidebar = () => {
   const pathname = usePathname()
 
   return (
-    <aside className="hidden min-h-screen w-64 flex-col bg-gray-900 p-4 text-gray-300 md:flex">
+    <aside className="hidden min-h-full w-64 flex-col bg-gray-900 p-4 text-gray-300 md:flex">
       <div className="mb-6 text-xl font-bold text-teal-400">WorkHive</div>
 
       <nav className="flex flex-col gap-2">

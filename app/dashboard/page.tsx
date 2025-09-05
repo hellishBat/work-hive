@@ -17,7 +17,7 @@ const workedHours = [
 const weeklyHours = [8, 7, 9, 8, 6] // Example for SummaryChart
 
 const DashboardPage = () => (
-  <div className="space-y-6">
+  <div className="bg space-y-6">
     <h2 className="text-2xl font-bold text-teal-400">Welcome to WorkHive 🚀</h2>
     <p className="text-gray-400">
       Here’s a quick overview of your team and productivity.

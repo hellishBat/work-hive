@@ -13,14 +13,11 @@ export const metadata = {
 const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <html lang="en" className={inter.className}>
-      <body className="min-h-screen bg-gray-950 text-gray-200">
+      <body className="bg-gray-950 text-gray-200">
         {/* Global Header */}
-        <header className="flex w-full items-center justify-between border-b border-gray-800 p-4">
-          <div className="text-xl font-bold text-teal-400">WorkHive</div>
-        </header>
 
         {/* Main content */}
-        <main className="flex-1">{children}</main>
+        <main className="global-main">{children}</main>
 
         {/* Optional Footer */}
         <Footer />

@@ -19,7 +19,7 @@ const AnalyticsPage = () => (
     <h2 className="text-2xl font-bold text-teal-400">Analytics</h2>
 
     {/* Absences Table */}
-    <Card variant="outlined" size="md">
+    <Card variant="outlined" size="lg">
       <h3 className="mb-2 font-semibold text-teal-400">Team Absences</h3>
       <table className="w-full text-gray-200">
         <thead>

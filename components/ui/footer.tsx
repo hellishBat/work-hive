@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils'
 export const Footer: React.FC<{ className?: string }> = ({ className }) => (
   <footer
     className={cn(
-      'flex w-full items-center justify-center gap-2 border-t border-gray-800 p-4 text-sm text-gray-400',
+      'flex w-full items-center justify-center gap-2 border-t border-gray-800 bg-gray-950 p-4 text-sm text-gray-400',
       className
     )}
   >

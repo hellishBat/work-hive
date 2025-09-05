@@ -4,8 +4,8 @@ import Link from 'next/link'
 import { Button } from '@/components/ui'
 
 const HomePage = () => (
-  <div className="flex min-h-screen flex-col items-center justify-center bg-gray-950 px-4 text-gray-200">
-    <h1 className="mb-4 text-4xl font-bold text-teal-400">
+  <div className="flex min-h-full flex-1 flex-col items-center justify-center bg-gray-950 px-4 text-gray-200">
+    <h1 className="mb-4 text-center text-4xl font-bold text-teal-400">
       Welcome to WorkHive 🚀
     </h1>
     <p className="mb-8 max-w-xl text-center text-gray-400">

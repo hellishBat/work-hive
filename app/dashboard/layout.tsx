@@ -3,7 +3,7 @@ import Header from '@/components/header'
 import { Sidebar } from '@/components/nav/sidebar'
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => (
-  <div className="flex min-h-screen bg-gray-950 text-gray-200">
+  <div className="flex flex-1 bg-gray-950 text-gray-200">
     <Sidebar />
 
     <div className="flex flex-1 flex-col">
