@@ -1,0 +1,16 @@
+{
+  "title": "Настройки",
+  "username": "Имя пользователя",
+  "email": "Электронная почта",
+  "theme": "Тема",
+  "themeSystem": "Системная",
+  "themeDark": "Темная",
+  "themeLight": "Светлая",
+  "saveSettings": "Сохранить настройки",
+  "userProfile": "Профиль пользователя",
+  "interfaceSettings": "Настройки интерфейса",
+  "language": "Язык",
+  "language_en": "Английский",
+  "language_ru": "Русский",
+  "language_uk": "Украинский"
+}

@@ -1,0 +1,12 @@
+{
+  "employeeDetails": "Employee Details",
+  "id": "ID",
+  "name": "Name",
+  "email": "Email",
+  "role": "Role",
+  "status": "Status",
+  "company": "Company",
+  "lastActive": "Last Active",
+  "lastSynced": "Last Synced",
+  "employeeNotFound": "Employee not found"
+}

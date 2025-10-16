@@ -1,6 +1,7 @@
-// Summary Chart
+// SummaryChart
 'use client'
 
+import { useEffect, useState } from 'react'
 import { Bar } from 'react-chartjs-2'
 import {
   BarElement,
@@ -11,6 +12,7 @@ import {
   Title,
   Tooltip,
 } from 'chart.js'
+import { useTheme } from 'next-themes'
 import { cn } from '@/lib'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
@@ -26,13 +28,30 @@ export const SummaryChart: React.FC<SummaryChartProps> = ({
   labels,
   title,
 }) => {
+  const { theme } = useTheme()
+  const [chartColors, setChartColors] = useState({
+    backgroundColor: '#ffffff', // Fallback
+    textColor: '#ffffff', // Fallback
+  })
+
+  useEffect(() => {
+    const rootStyles = getComputedStyle(document.documentElement)
+    const chartColor = rootStyles.getPropertyValue('--primary').trim()
+    const foregroundColor = rootStyles.getPropertyValue('--foreground').trim()
+
+    setChartColors({
+      backgroundColor: chartColor, // Use --primary for bars
+      textColor: foregroundColor, // Use --foreground for legend and title
+    })
+  }, [theme])
+
   const chartData = {
     labels,
     datasets: [
       {
         label: title || 'Summary',
         data,
-        backgroundColor: '#14B8A6',
+        backgroundColor: chartColors.backgroundColor,
       },
     ],
   }
@@ -44,12 +63,21 @@ export const SummaryChart: React.FC<SummaryChartProps> = ({
         options={{
           responsive: true,
           plugins: {
-            legend: { labels: { color: '#14B8A6' } },
-            title: { display: !!title, text: title, color: '#14B8A6' },
+            legend: {
+              labels: {
+                color: chartColors.textColor,
+              },
+            },
+            title: {
+              display: !!title,
+              text: title,
+              color: chartColors.textColor,
+            },
           },
           scales: {
-            y: { ticks: { color: '#14B8A6' }, beginAtZero: true },
-            x: { ticks: { color: '#14B8A6' } },
+            y: {
+              beginAtZero: true,
+            },
           },
         }}
       />

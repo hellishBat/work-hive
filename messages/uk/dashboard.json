@@ -1,0 +1,16 @@
+{
+  "welcome": "Ласкаво просимо до WorkHive 🚀",
+  "description": "Огляд твоєї команди та продуктивності.",
+  "workedHours": "Відпрацьовані години",
+  "weeklyHours": "Години за тиждень",
+  "teamAbsences": "Відсутності команди",
+  "name": "Ім’я",
+  "type": "Тип",
+  "days": "Днів",
+  "productivityChart": "Діаграма продуктивності",
+  "quickActions": "Швидкі дії",
+  "addAbsence": "Додати відсутність",
+  "generateReport": "Згенерувати звіт",
+  "teamSettings": "Налаштування команди",
+  "daysAbbreviation": ["Пн", "Вт", "Ср", "Чт", "Пт"]
+}

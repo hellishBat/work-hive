@@ -1,0 +1,11 @@
+{
+  "title": "Welcome to WorkHive",
+  "description": "Your team productivity dashboard.",
+  "login": "Login",
+  "loginTitle": "Login",
+  "email": "Email",
+  "password": "Password",
+  "cancel": "Cancel",
+  "loggingIn": "Logging in...",
+  "loginError": "Login failed. Please check your credentials."
+}

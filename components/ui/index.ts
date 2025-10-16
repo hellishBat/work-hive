@@ -1,5 +1,11 @@
 // UI Components
 export * from './button'
-export * from './card'
+export * from './cards'
+export * from './chip'
 export * from './dialog'
-export * from './footer'
+export * from './input'
+export * from './label'
+export * from './select'
+export * from './separator'
+export * from './sidebar'
+export * from './tables'

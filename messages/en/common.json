@@ -1,0 +1,17 @@
+{
+  "unauthorized": {
+    "title": "Access Denied",
+    "message": "You do not have permission to view this page."
+  },
+  "Role": {
+    "User": "User",
+    "Manager": "Manager"
+  },
+  "Absence": {
+    "Sick": "Sick Leave",
+    "Vacation": "Vacation"
+  },
+  "Values": {
+    "hours": "h."
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "title": "My Team",
+  "employeesList": "Employees List",
+  "tableCaption": "List of all synced employees",
+  "Role": {
+    "User": "User",
+    "Manager": "Manager"
+  }
+}

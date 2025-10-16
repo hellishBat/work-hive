@@ -1,0 +1,16 @@
+{
+  "title": "Settings",
+  "username": "Username",
+  "email": "Email",
+  "theme": "Theme",
+  "themeSystem": "System",
+  "themeDark": "Dark",
+  "themeLight": "Light",
+  "saveSettings": "Save Settings",
+  "userProfile": "User Profile",
+  "interfaceSettings": "Interface Settings",
+  "language": "Language",
+  "language_en": "English",
+  "language_ru": "Russian",
+  "language_uk": "Ukrainian"
+}

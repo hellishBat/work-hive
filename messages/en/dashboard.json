@@ -1,0 +1,16 @@
+{
+  "welcome": "Welcome to WorkHive 🚀",
+  "description": "Here’s a quick overview of your team and productivity.",
+  "workedHours": "Worked Hours",
+  "weeklyHours": "Weekly Hours",
+  "teamAbsences": "Team Absences",
+  "name": "Name",
+  "type": "Type",
+  "days": "Days",
+  "productivityChart": "Productivity Chart",
+  "quickActions": "Quick Actions",
+  "addAbsence": "Add Absence",
+  "generateReport": "Generate Report",
+  "teamSettings": "Team Settings",
+  "daysAbbreviation": ["Mon", "Tue", "Wed", "Thu", "Fri"]
+}
