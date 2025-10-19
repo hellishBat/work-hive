@@ -1,20 +1,29 @@
 // Footer
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { Heart } from '@/assets'
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib'
 
-const Footer: React.FC<{ className?: string }> = ({ className }) => (
-  <footer
-    className={cn(
-      'text-secondary border-border bg-card flex w-full items-center justify-center gap-2 border-t py-4 text-xs',
-      className
-    )}
-  >
-    <span>Coded with</span>
-    <Heart className="opacity-50" />
-    <span>by Valentine Samoylov for NYKS Solutions</span>
-  </footer>
-)
+const Footer: React.FC<{ className?: string }> = ({ className }) => {
+  const t = useTranslations('Common.footer')
+
+  return (
+    <footer
+      className={cn(
+        'text-foreground border-border bg-card w-full border-t py-4 text-xs',
+        className
+      )}
+    >
+      <div className="container">
+        <div className="flex items-center justify-center gap-2">
+          <span>{t('codedWith')}</span>
+          <Heart />
+          <span>{t('by')}</span>
+        </div>
+      </div>
+    </footer>
+  )
+}
 
 export default Footer

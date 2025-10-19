@@ -3,8 +3,8 @@
 
 import * as Avatar from '@radix-ui/react-avatar'
 import { Bell } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { SidebarCollapseButton } from '@/components/ui/button/sidebar-collapse-button'
+import { SidebarCollapseButton } from '@/components/shared'
+import { Button } from '@/components/ui'
 
 const Header = () => (
   <header className="border-border bg-card text-card-foreground flex items-center justify-between border-b p-4 shadow-md">

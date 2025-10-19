@@ -4,7 +4,8 @@
 import { useTranslations } from 'next-intl'
 import { SummaryChart, TeamChart } from '@/components/charts'
 import { SectionWrapper } from '@/components/layout'
-import { AbsenceTable, Button, Card } from '@/components/ui'
+import { AbsenceTable } from '@/components/shared'
+import { Button, Card } from '@/components/ui'
 
 const absences = [
   { name: 'Alice', type: 'Vacation', days: 3 },

@@ -2,7 +2,6 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { AbsenceChip } from '@/components/ui'
 import {
   Table,
   TableBody,
@@ -10,7 +9,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/tables/table'
+} from '@/components/ui'
+import { AbsenceChip } from './'
 
 // Define absence type
 type Absence = {

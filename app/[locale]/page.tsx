@@ -2,7 +2,7 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { LoginDialog } from '@/components/login-dialog'
+import { LoginDialog } from '@/components'
 
 const HomePage = () => {
   const t = useTranslations('Home')

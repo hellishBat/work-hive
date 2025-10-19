@@ -5,15 +5,14 @@ import { useState } from 'react'
 import { Mail, Save, User } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { SectionWrapper } from '@/components/layout'
+import { LanguageSelect, ThemeSelect } from '@/components/shared'
 import {
   Button,
   Card,
   Input,
   Label,
-  LanguageSelect,
   SelectGroup,
   SelectLabel,
-  ThemeSelect,
 } from '@/components/ui'
 
 const SettingsPage = () => {

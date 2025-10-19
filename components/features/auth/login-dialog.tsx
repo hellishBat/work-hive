@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl'
 import { useParams } from 'next/navigation'
 import { Button, Input, Label } from '@/components/ui'
 import { useLogin } from '@/hooks'
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib'
 
 export const LoginDialog = () => {
   const t = useTranslations('Home')

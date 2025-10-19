@@ -2,8 +2,8 @@
 'use client'
 
 import { PanelLeftClose, PanelLeftOpen } from 'lucide-react'
-import { useSidebarStore } from '@/store/sidebar'
-import { Button } from './'
+import { Button } from '@/components/ui'
+import { useSidebarStore } from '@/store/ui'
 
 export const SidebarCollapseButton = () => {
   const { collapsed, toggle } = useSidebarStore()

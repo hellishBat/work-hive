@@ -3,6 +3,10 @@
     "title": "Доступ заборонено",
     "message": "Ви не маєте дозволу переглядати цю сторінку."
   },
+  "footer": {
+    "codedWith": "Створено з",
+    "by": "від Valentine Samoylov для NYKS Solutions"
+  },
   "Role": {
     "User": "Користувач",
     "Manager": "Менеджер"

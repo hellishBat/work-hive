@@ -3,7 +3,7 @@
 
 import { JSX } from 'react'
 import { Crown, Medal, User, Users } from 'lucide-react'
-import { Chip } from './'
+import { Chip } from '@/components/ui'
 
 export type RoleType = 'User' | 'Manager' | 'Admin' | 'Owner'
 

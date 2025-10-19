@@ -3,6 +3,10 @@
     "title": "Access Denied",
     "message": "You do not have permission to view this page."
   },
+  "footer": {
+    "codedWith": "Coded with",
+    "by": "by Valentine Samoylov for NYKS Solutions"
+  },
   "Role": {
     "User": "User",
     "Manager": "Manager"

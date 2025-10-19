@@ -4,11 +4,10 @@
 import { BarChart2, Home, LogOut, Settings, Users } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { Logo, LogoIcon } from '@/assets'
-import { Button } from '@/components/ui/button'
+import { Button, Separator } from '@/components/ui'
 import { Link, usePathname } from '@/i18n/navigation'
 import { cn } from '@/lib'
-import { useSidebarStore } from '@/store/sidebar'
-import { Separator } from '../ui/separator'
+import { useSidebarStore } from '@/store/ui'
 
 const NAV_ITEMS = [
   { key: 'dashboard', icon: Home },

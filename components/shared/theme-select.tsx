@@ -10,8 +10,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { cn } from '@/lib/utils'
+} from '@/components/ui'
+import { cn } from '@/lib'
 
 const ThemeSelect = () => {
   const { theme, setTheme } = useTheme()

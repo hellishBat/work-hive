@@ -19,13 +19,15 @@ export const SectionWrapper = ({
 }: SectionWrapperProps) => {
   return (
     <section className={cn('pt-4 pl-6', className)}>
-      <h2
-        className={`text-primary text-3xl font-bold ${cn('mb-2', !description && 'mb-6')}`}
-      >
-        {title}
-      </h2>
-      {description && <p className="text-secondary mb-6">{description}</p>}
-      {children}
+      <div className="container">
+        <h2
+          className={`text-primary text-3xl font-bold ${cn('mb-2', !description && 'mb-6')}`}
+        >
+          {title}
+        </h2>
+        {description && <p className="text-secondary mb-6">{description}</p>}
+        {children}
+      </div>
     </section>
   )
 }

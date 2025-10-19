@@ -19,57 +19,83 @@ serve(async (req) => {
         },
       }
     )
-
-    if (!res.ok) {
+    if (!res.ok)
       throw new Error(`Failed to fetch users: ${res.status} ${res.statusText}`)
-    }
 
-    const json = await res.json()
+    const { users } = await res.json()
+    if (!Array.isArray(users)) throw new Error('Users data is not an array')
 
-    // The users array is in json.users
-    const users = json.users
-    if (!Array.isArray(users)) {
-      throw new Error('Users data is not an array')
-    }
+    // Fetch all employees corresponding to users
+    const emails = users.map((u) => u.email).filter(Boolean)
+    const { data: employees } = await supabase
+      .from('employees')
+      .select('id, email, role, name')
+      .in('email', emails)
+
+    const roleMap = ['user', 'manager', 'admin', 'owner']
+
+    // Fetch existing profiles
+    const userIds = users.map((u) => u.id)
+    const { data: existingProfiles } = await supabase
+      .from('profiles')
+      .select('*')
+      .in('id', userIds)
+
+    // Lookup maps
+    const empMap = new Map(employees?.map((e) => [e.email, e]))
+    const profileMap = new Map(existingProfiles?.map((p) => [p.id, p]))
+
+    const upsertData: any[] = []
 
     for (const user of users) {
       if (!user.email) continue
 
-      // Find employee by email
-      const { data: emp, error: empError } = await supabase
-        .from('employees')
-        .select('id, role')
-        .eq('email', user.email)
-        .limit(1)
-        .single()
+      const emp = empMap.get(user.email)
+      const existing = profileMap.get(user.id)
 
-      if (empError && empError.code !== 'PGRST116') {
-        console.error('Employee lookup failed:', empError)
+      // Prepare object for upsert
+      const profileUpdate: any = {}
+
+      // Only set name if not exists
+      if (!existing?.name) {
+        profileUpdate.name = emp?.name || user.email.split('@')[0]
       }
 
-      const roleMap = ['user', 'manager', 'admin', 'owner']
-      const role = emp ? roleMap[emp.role] || 'user' : 'user'
+      // Only set role if not exists
+      if (!existing?.role && emp?.role !== undefined && emp?.role !== null) {
+        profileUpdate.role = roleMap[emp.role] ?? 'user'
+      }
 
-      // Upsert into profiles
-      const { error: upsertError } = await supabase.from('profiles').upsert({
-        id: user.id,
-        email: user.email,
-        role,
-        employee_id: emp?.id ?? null,
-        has_timetracker: !!emp,
-        created_at: new Date().toISOString(),
-      })
+      // Always set employee_id and has_timetracker
+      if (!existing?.employee_id && emp?.id) profileUpdate.employee_id = emp.id
+      if (
+        existing?.has_timetracker === null ||
+        existing?.has_timetracker === undefined
+      ) {
+        profileUpdate.has_timetracker = !!emp
+      }
 
-      if (upsertError) {
-        console.error('Failed to upsert profile:', upsertError)
+      // Timestamps
+      const now = new Date().toISOString()
+      if (!existing) profileUpdate.created_at = now
+      if (Object.keys(profileUpdate).length > 0) profileUpdate.updated_at = now
+
+      // Only upsert if there are changes or new record
+      if (Object.keys(profileUpdate).length > 0) {
+        upsertData.push({ id: user.id, email: user.email, ...profileUpdate })
       }
     }
 
+    if (upsertData.length > 0) {
+      const { error } = await supabase
+        .from('profiles')
+        .upsert(upsertData, { onConflict: ['id'] })
+      if (error) console.error('Batch upsert failed:', error)
+    }
+
     return new Response(
-      JSON.stringify({ status: 'ok', synced: users.length }),
-      {
-        status: 200,
-      }
+      JSON.stringify({ status: 'ok', synced: upsertData.length }),
+      { status: 200 }
     )
   } catch (err: any) {
     console.error('Sync failed:', err)

@@ -1,4 +1,4 @@
-// Sidebar Store
+// UI Store
 import { create } from 'zustand'
 
 interface SidebarStore {

@@ -1,6 +1,6 @@
 // Input
 import * as React from 'react'
-import { cn } from '@/lib/utils/index'
+import { cn } from '@/lib'
 
 const Input = ({
   className,

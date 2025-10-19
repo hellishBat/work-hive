@@ -5,9 +5,9 @@ import React, { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { useParams, useRouter } from 'next/navigation'
 import { SectionWrapper } from '@/components/layout'
+import { RoleChip } from '@/components/shared'
 import {
   Card,
-  RoleChip,
   Table,
   TableBody,
   TableCaption,
@@ -16,7 +16,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui'
-import { supabase } from '@/lib'
+import { supabaseClient } from '@/lib'
 import { ROLE_MAP, RoleKey } from '@/lib/constants'
 
 interface Employee {
@@ -41,7 +41,7 @@ const MyTeamPage: React.FC = () => {
     const fetchEmployees = async () => {
       setLoading(true)
       try {
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
           .from<Employee>('employees')
           .select('*')
           .order('name', { ascending: true })

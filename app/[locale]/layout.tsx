@@ -1,5 +1,5 @@
 // Layout (Locale)
-import './globals.css'
+import '@/styles/globals.css'
 import { ReactNode } from 'react'
 import { createTranslator, NextIntlClientProvider } from 'next-intl'
 import { ThemeProvider } from 'next-themes'
@@ -34,10 +34,19 @@ const LocaleLayout = async ({ children, params }: Props) => {
   const { locale: loadedLocale, messages } = await loadMessages(locale)
 
   return (
-    <html lang={locale} className={notoSans.className}>
-      <body>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <NextIntlClientProvider locale={locale} messages={messages}>
+    <html
+      lang={locale}
+      className={notoSans.className}
+      suppressHydrationWarning // 👈 важливо
+    >
+      <body suppressHydrationWarning>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <NextIntlClientProvider locale={loadedLocale} messages={messages}>
             <Header />
             <main className="global-main">{children}</main>
             <Footer />
