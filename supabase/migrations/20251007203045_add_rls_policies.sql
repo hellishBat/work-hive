@@ -10,25 +10,26 @@ ALTER TABLE public.employees ENABLE ROW LEVEL SECURITY;
 CREATE POLICY profiles_read_own
 ON public.profiles
 FOR SELECT
-USING (auth.uid() = id);
+USING (id = current_setting('request.jwt.claim.sub')::uuid);
 
 -- Users can update their own profile
 CREATE POLICY profiles_update_own
 ON public.profiles
 FOR UPDATE
-USING (auth.uid() = id);
+USING (id = current_setting('request.jwt.claim.sub')::uuid);
 
 -- Admins/managers/owners can read all profiles
 CREATE POLICY profiles_read_admins
 ON public.profiles
 FOR SELECT
-USING (auth.role() IN ('admin', 'manager', 'owner'));
+USING (current_setting('request.jwt.claim.role') IN ('admin','manager','owner'));
 
 -- Admins/managers/owners can update all profiles
 CREATE POLICY profiles_update_admins
 ON public.profiles
 FOR UPDATE
-USING (auth.role() IN ('admin', 'manager', 'owner'));
+USING (current_setting('request.jwt.claim.role') IN ('admin','manager','owner'));
+
 
 -- ==============================
 -- EMPLOYEES TABLE POLICIES
@@ -38,10 +39,10 @@ USING (auth.role() IN ('admin', 'manager', 'owner'));
 CREATE POLICY employees_read_admins
 ON public.employees
 FOR SELECT
-USING (auth.role() IN ('admin', 'manager', 'owner'));
+USING (current_setting('request.jwt.claim.role') IN ('admin','manager','owner'));
 
 -- Admins/managers/owners can update employees
 CREATE POLICY employees_update_admins
 ON public.employees
 FOR UPDATE
-USING (auth.role() IN ('admin', 'manager', 'owner'));
+USING (current_setting('request.jwt.claim.role') IN ('admin','manager','owner'));

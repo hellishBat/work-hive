@@ -1,33 +1,24 @@
 // Header
 'use client'
 
-import * as Avatar from '@radix-ui/react-avatar'
-import { Bell } from 'lucide-react'
+import { Bell, BellDot } from 'lucide-react'
 import { SidebarCollapseButton } from '@/components/shared'
-import { Button } from '@/components/ui'
+import { Button } from '../ui'
 
 const Header = () => (
-  <header className="border-border bg-card text-card-foreground flex items-center justify-between border-b p-4 shadow-md">
-    <div className="flex items-center gap-4">
-      <SidebarCollapseButton />
-      <Button variant="ghost" size="icon">
-        <Bell className="h-5 w-5" />
-      </Button>
+  <header className="text-muted-foreground border-border m-0 border-b p-4 pl-6 text-sm">
+    <div className="container">
+      <div className="flex items-center justify-between">
+        <SidebarCollapseButton />
+        <Button variant="ghost" size="icon">
+          <Bell className="h-5 w-5" />
+          {/* <span className="relative z-0">
+            <BellDot className="h-5 w-5" />
+            <span className="absolute top-[3px] right-0.5 -z-10 h-1 w-1 animate-pulse rounded-full bg-red-500"></span>
+          </span> */}
+        </Button>
+      </div>
     </div>
-
-    <Avatar.Root className="bg-muted relative h-8 w-8 overflow-hidden rounded-full">
-      <Avatar.Image
-        className="h-full w-full object-cover"
-        src="/path-to-avatar.jpg"
-        alt="User Avatar"
-      />
-      <Avatar.Fallback
-        className="bg-muted text-primary-foreground flex h-full w-full items-center justify-center text-sm font-bold"
-        delayMs={600}
-      >
-        W
-      </Avatar.Fallback>
-    </Avatar.Root>
   </header>
 )
 

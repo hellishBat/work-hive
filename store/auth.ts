@@ -1,20 +1,21 @@
 // Auth Store
-// store/auth.ts
 'use client'
 
 import { create } from 'zustand'
 
-interface User {
+interface UserProfile {
   id: string
   email?: string
   role?: string
+  name?: string
+  employee_id?: string
   [key: string]: any
 }
 
 interface AuthState {
-  user: User | null
+  user: UserProfile | null
   loading: boolean
-  setUser: (user: User | null) => void
+  setUser: (user: UserProfile | null) => void
   setLoading: (loading: boolean) => void
   logout: (locale?: string) => Promise<void>
 }

@@ -1,10 +1,10 @@
-// Layout (Locale)
+// Global Layout (Locale)
 import '@/styles/globals.css'
 import { ReactNode } from 'react'
 import { createTranslator, NextIntlClientProvider } from 'next-intl'
 import { ThemeProvider } from 'next-themes'
 import { Noto_Sans } from 'next/font/google'
-import { Footer, Header } from '@/components/layout'
+import { Footer } from '@/components/layout'
 import { loadMessages } from '@/i18n/load-messages'
 
 const notoSans = Noto_Sans({ subsets: ['latin', 'cyrillic'] })
@@ -34,11 +34,7 @@ const LocaleLayout = async ({ children, params }: Props) => {
   const { locale: loadedLocale, messages } = await loadMessages(locale)
 
   return (
-    <html
-      lang={locale}
-      className={notoSans.className}
-      suppressHydrationWarning // 👈 важливо
-    >
+    <html lang={locale} className={notoSans.className} suppressHydrationWarning>
       <body suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
@@ -47,9 +43,7 @@ const LocaleLayout = async ({ children, params }: Props) => {
           disableTransitionOnChange
         >
           <NextIntlClientProvider locale={loadedLocale} messages={messages}>
-            <Header />
             <main className="global-main">{children}</main>
-            <Footer />
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>

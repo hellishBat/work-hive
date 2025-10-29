@@ -1,6 +1,7 @@
 // Shared Components
 // Chips
 export * from './absence-chip'
+export * from './status-chip'
 export * from './role-chip'
 
 // Tables

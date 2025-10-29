@@ -1,2 +1,2 @@
 // Auth Feature Components
-export * as LoginDialog from './login-dialog'
+export * from './login-dialog'

@@ -1,11 +1,13 @@
-// Dashboard Layout
-import { Sidebar } from '@/components/layout'
+// Dashboard Layout (Server)
+import { getUserProfile } from '@/app/actions/get-user-profile'
+import DashboardLayoutClient from './layout-client'
 
-const DashboardLayout = ({ children }: { children: React.ReactNode }) => (
-  <div className="bg-background flex flex-1 p-3">
-    <Sidebar />
-    <main className="flex-1">{children}</main>
-  </div>
-)
+const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
+  const profile = await getUserProfile()
+
+  return (
+    <DashboardLayoutClient profile={profile}>{children}</DashboardLayoutClient>
+  )
+}
 
 export default DashboardLayout

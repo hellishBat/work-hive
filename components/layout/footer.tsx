@@ -11,7 +11,7 @@ const Footer: React.FC<{ className?: string }> = ({ className }) => {
   return (
     <footer
       className={cn(
-        'text-foreground border-border bg-card w-full border-t py-4 text-xs',
+        'text-muted-foreground border-border mt-auto w-full border-t py-5 text-xs leading-5',
         className
       )}
     >

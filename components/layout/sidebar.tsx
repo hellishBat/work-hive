@@ -1,13 +1,25 @@
 // Sidebar
 'use client'
 
-import { BarChart2, Home, LogOut, Settings, Users } from 'lucide-react'
+import { useTransition } from 'react'
+import { BarChart2, Home, Settings, Users } from 'lucide-react'
 import { useTranslations } from 'next-intl'
+import { logoutAction } from '@/app/actions/auth/logout'
 import { Logo, LogoIcon } from '@/assets'
-import { Button, Separator } from '@/components/ui'
+import { Separator } from '@/components/ui'
 import { Link, usePathname } from '@/i18n/navigation'
 import { cn } from '@/lib'
 import { useSidebarStore } from '@/store/ui'
+import { NavUser } from '../ui/nav-user'
+
+interface SidebarProps {
+  profile: {
+    name?: string | null
+    email?: string | null
+    role?: string | null
+    avatar_url?: string | null
+  }
+}
 
 const NAV_ITEMS = [
   { key: 'dashboard', icon: Home },
@@ -16,11 +28,11 @@ const NAV_ITEMS = [
   { key: 'settings', icon: Settings },
 ]
 
-const Sidebar = () => {
+const Sidebar: React.FC<SidebarProps> = ({ profile }) => {
   const t = useTranslations('Sidebar')
   const pathname = usePathname()
-
   const collapsed = useSidebarStore((state) => state.collapsed)
+  const [pending, startTransition] = useTransition()
 
   const currentLocale = pathname.split('/')[1] || 'en'
 
@@ -32,28 +44,18 @@ const Sidebar = () => {
     return { ...item, name: t(item.key), href }
   })
 
-  const handleLogout = async () => {
-    try {
-      const res = await fetch('/api/auth/logout', { method: 'POST' })
-      if (res.ok) {
-        localStorage.removeItem('access_token')
-        localStorage.removeItem('refresh_token')
-        window.location.href = '/' // redirect manually
-      } else {
-        console.error('Logout failed', res.statusText)
-      }
-    } catch (err) {
-      console.error('Logout failed', err)
-    }
+  const handleLogout = () => {
+    startTransition(() => logoutAction())
   }
 
   return (
     <aside
       className={cn(
-        'bg-sidebar relative flex flex-col rounded-xl border shadow-md transition-all duration-300 ease-in-out',
+        'bg-sidebar flex flex-col border-r shadow-sm transition-all duration-300 ease-in-out',
         collapsed ? 'w-20' : 'w-64'
       )}
     >
+      {/* Logo */}
       <div
         className={cn(
           'flex items-center justify-between px-4 py-5 transition-all',
@@ -81,7 +83,7 @@ const Sidebar = () => {
       <Separator />
 
       {/* Navigation */}
-      <nav className="flex flex-1 flex-col gap-1 p-3">
+      <nav className="flex flex-1 flex-col gap-1 p-3 pt-6 pl-0">
         {navItems.map(({ name, href, icon: Icon }) => {
           const isActive = pathname === href
           return (
@@ -89,10 +91,10 @@ const Sidebar = () => {
               key={name}
               href={href}
               className={cn(
-                'hover:bg-accent hover:text-accent-foreground flex items-center gap-3 rounded-lg px-4 py-2.5 text-sm text-nowrap transition-colors',
+                'hover:bg-primary/20 hover:text-primary text-foreground flex items-center gap-3 rounded-r-md py-2.5 pr-3 pl-6 text-sm font-semibold text-nowrap transition-colors hover:shadow-md',
                 isActive &&
-                  'bg-primary text-primary-foreground hover:bg-primary/90',
-                collapsed && 'justify-center gap-0 px-2'
+                  'bg-primary/30 hover:bg-primary/20 text-primary shadow-sm',
+                collapsed && 'justify-center gap-0'
               )}
             >
               <Icon className="h-5 w-5 shrink-0" />
@@ -102,21 +104,18 @@ const Sidebar = () => {
         })}
       </nav>
 
-      <Separator />
-
-      {/* Logout Button */}
-      <div className="p-3">
-        <Button
-          variant="destructive"
-          onClick={handleLogout}
-          className={cn(
-            'flex w-full items-center gap-2 text-sm',
-            collapsed && 'justify-center'
-          )}
-        >
-          <LogOut className="h-5 w-5" />
-          {!collapsed && <span>{t('logout')}</span>}
-        </Button>
+      {/* Sidebar footer */}
+      <div className="border-border flex justify-center border-t px-3 py-1.5">
+        <NavUser
+          collapsed={collapsed}
+          user={{
+            name: profile?.name || 'Unknown',
+            email: profile?.email || '',
+            role: profile?.role || '',
+            avatar_url: profile?.avatar_url || '',
+          }}
+          onLogout={handleLogout}
+        />
       </div>
     </aside>
   )
