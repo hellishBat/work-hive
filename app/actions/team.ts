@@ -5,7 +5,7 @@ import { revalidatePath } from 'next/cache'
 import { createServerSupabase as createServerClient } from '@/lib/supabase/server'
 
 // Fetch all team members
-export async function getTeamProfiles() {
+export const getTeamProfiles = async () => {
   const supabase = await createServerClient()
 
   const { data, error } = await supabase
@@ -22,7 +22,7 @@ export async function getTeamProfiles() {
 }
 
 // Fetch single user by ID
-export async function getUserById(id: string) {
+export const getUserById = async (id: string) => {
   const supabase = await createServerClient()
   const { data, error } = await supabase
     .from('profiles')
@@ -34,7 +34,7 @@ export async function getUserById(id: string) {
 }
 
 // Create new user (admin only)
-export async function createUser({
+export const createUser = async ({
   email,
   name,
   role,
@@ -42,7 +42,7 @@ export async function createUser({
   email: string
   name: string
   role: string
-}) {
+}) => {
   const supabase = await createServerClient()
 
   // Create user in Auth
@@ -62,7 +62,7 @@ export async function createUser({
 }
 
 // Delete user
-export async function deleteUser(userId: string) {
+export const deleteUser = async (userId: string) => {
   const supabase = await createServerClient()
 
   // Delete from Auth

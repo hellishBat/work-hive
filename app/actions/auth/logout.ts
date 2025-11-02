@@ -7,7 +7,7 @@ import { createServerSupabase } from '@/lib/supabase/server'
 /**
  * Logs out the current user and clears Supabase cookies.
  */
-export async function logoutAction() {
+export const logoutAction = async () => {
   const supabase = await createServerSupabase()
   const { error } = await supabase.auth.signOut()
 

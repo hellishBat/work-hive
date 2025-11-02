@@ -6,7 +6,7 @@ import { routing } from '@/i18n/routing'
 
 const withI18n = createMiddleware(routing)
 
-export async function middleware(request: NextRequest) {
+export const middleware = async (request: NextRequest) => {
   const i18nResponse = await withI18n(request)
   if (i18nResponse) return i18nResponse
 

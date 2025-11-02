@@ -3,17 +3,17 @@
 
 import * as Avatar from '@radix-ui/react-avatar'
 import { ChevronsUpDown, LogOut, Settings, User } from 'lucide-react'
-import { cn } from '@/lib'
-import { RoleChip } from '../shared'
-import { Button } from './button'
+import { RoleChip } from '@/components/shared'
 import {
+  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from './dropdown-menu'
+} from '@/components/ui'
+import { cn } from '@/lib'
 
 interface NavUserProps {
   collapsed?: boolean
@@ -110,17 +110,14 @@ export const NavUser: React.FC<NavUserProps> = ({
         )}
       >
         <DropdownMenuLabel className="p-0 font-normal">
-          <div className="flex items-center gap-3 px-2 py-2 text-left text-sm">
-            <AvatarBlock size="lg" />
-            <div className="flex min-w-0 flex-1 flex-col items-start">
-              <span className="w-full truncate overflow-hidden text-sm font-medium whitespace-nowrap">
-                {user?.name}
-              </span>
-              <span className="text-muted-foreground mb-1 w-full truncate overflow-hidden text-xs whitespace-nowrap">
-                {user?.email}
-              </span>
-              {user?.role && <RoleChip role={user?.role} />}
-            </div>
+          <div className="flex min-w-0 flex-1 flex-col items-start p-2">
+            <span className="mb-1 w-full truncate overflow-hidden font-medium whitespace-nowrap">
+              {user?.name}
+            </span>
+            <span className="text-muted-foreground mb-2 w-full truncate overflow-hidden text-xs whitespace-nowrap">
+              {user?.email}
+            </span>
+            {user?.role && <RoleChip role={user?.role} />}
           </div>
         </DropdownMenuLabel>
 

@@ -3,7 +3,7 @@
 
 import { createServerSupabase } from '@/lib/supabase/server'
 
-export async function getUserProfile() {
+export const getUserProfile = async () => {
   const supabase = await createServerSupabase()
   const {
     data: { user },

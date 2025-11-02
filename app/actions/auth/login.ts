@@ -8,7 +8,7 @@ import { createServerSupabase } from '@/lib/supabase/server'
  * Authenticates user via Supabase email/password
  * and redirects to dashboard on success.
  */
-export async function loginAction(formData: FormData) {
+export const loginAction = async (formData: FormData) => {
   const email = String(formData.get('email') || '').trim()
   const password = String(formData.get('password') || '').trim()
 
