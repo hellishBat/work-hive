@@ -1,3 +1,4 @@
+// i18n Navigation
 import { createNavigation } from 'next-intl/navigation'
 import { routing } from './routing'
 

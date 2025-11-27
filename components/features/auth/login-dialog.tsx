@@ -5,14 +5,12 @@ import { useTransition } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { Lock, LogIn, Mail, X } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { useParams } from 'next/navigation'
 import { loginAction } from '@/app/actions/auth/login'
 import { Button, Input, Label } from '@/components/ui'
 import { cn } from '@/lib'
 
 export const LoginDialog = () => {
   const t = useTranslations('Home')
-  const { locale } = useParams()
   const [pending, startTransition] = useTransition()
 
   return (
@@ -36,7 +34,9 @@ export const LoginDialog = () => {
           </Dialog.Title>
 
           <form
-            action={loginAction}
+            action={async (formData: FormData) => {
+              await loginAction(formData)
+            }}
             className="space-y-4"
             onSubmit={() => startTransition(() => {})}
           >

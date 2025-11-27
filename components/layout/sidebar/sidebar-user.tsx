@@ -1,4 +1,4 @@
-// NavUser
+// SidebarUser
 'use client'
 
 import * as Avatar from '@radix-ui/react-avatar'
@@ -15,7 +15,7 @@ import {
 } from '@/components/ui'
 import { cn } from '@/lib'
 
-interface NavUserProps {
+interface SidebarUserProps {
   collapsed?: boolean
   user: {
     name?: string | null
@@ -26,7 +26,7 @@ interface NavUserProps {
   onLogout?: () => void
 }
 
-export const NavUser: React.FC<NavUserProps> = ({
+export const SidebarUser: React.FC<SidebarUserProps> = ({
   collapsed = false,
   user,
   onLogout,
@@ -47,7 +47,7 @@ export const NavUser: React.FC<NavUserProps> = ({
     return (
       <Avatar.Root
         className={cn(
-          'border-border bg-muted relative shrink-0 overflow-hidden rounded-md border',
+          'bg-muted relative shrink-0 overflow-hidden rounded-md shadow-inner',
           sizeClasses
         )}
       >
@@ -58,7 +58,7 @@ export const NavUser: React.FC<NavUserProps> = ({
         />
         <Avatar.Fallback
           className={cn(
-            'text-primary-foreground flex h-full w-full items-center justify-center font-bold',
+            'flex h-full w-full items-center justify-center font-bold',
             textSize
           )}
         >
@@ -135,10 +135,7 @@ export const NavUser: React.FC<NavUserProps> = ({
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem
-          onClick={onLogout}
-          className="text-destructive focus:text-destructive"
-        >
+        <DropdownMenuItem onClick={onLogout} variant="destructive">
           <LogOut className="h-4 w-4" />
           <span>Log out</span>
         </DropdownMenuItem>

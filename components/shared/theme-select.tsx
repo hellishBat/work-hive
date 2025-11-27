@@ -2,7 +2,6 @@
 'use client'
 
 import { Laptop, Moon, Sun } from 'lucide-react'
-import { useTranslations } from 'next-intl'
 import { useTheme } from 'next-themes'
 import {
   Select,
@@ -11,20 +10,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui'
-import { cn } from '@/lib'
 
-const ThemeSelect = () => {
+interface ThemeSelectProps {
+  t: (key: string) => string
+}
+
+const ThemeSelect = ({ t }: ThemeSelectProps) => {
   const { theme, setTheme } = useTheme()
-  const t = useTranslations('Settings')
+  // No interal useTranslations here
 
   return (
     <Select value={theme} onValueChange={setTheme}>
-      <SelectTrigger
-        className={cn(
-          'bg-card text-card-foreground border-border focus:ring-ring w-[180px] rounded-[var(--radius)]'
-        )}
-      >
-        <SelectValue placeholder={t('themeSystem')} />
+      <SelectTrigger>
+        <SelectValue placeholder={t('system')} />
       </SelectTrigger>
       <SelectContent className="bg-card text-card-foreground border-border">
         <SelectItem
@@ -32,8 +30,8 @@ const ThemeSelect = () => {
           className="hover:bg-muted hover:text-muted-foreground"
         >
           <div className="flex items-center gap-2">
-            <Laptop className="text-card-foreground h-4 w-4" />
-            <span>{t('themeSystem')}</span>
+            <Laptop className="h-4 w-4" />
+            <span>{t('system')}</span>
           </div>
         </SelectItem>
         <SelectItem
@@ -41,8 +39,8 @@ const ThemeSelect = () => {
           className="hover:bg-muted hover:text-muted-foreground"
         >
           <div className="flex items-center gap-2">
-            <Moon className="text-card-foreground h-4 w-4" />
-            <span>{t('themeDark')}</span>
+            <Moon className="h-4 w-4" />
+            <span>{t('dark')}</span>
           </div>
         </SelectItem>
         <SelectItem
@@ -50,8 +48,8 @@ const ThemeSelect = () => {
           className="hover:bg-muted hover:text-muted-foreground"
         >
           <div className="flex items-center gap-2">
-            <Sun className="text-card-foreground h-4 w-4" />
-            <span>{t('themeLight')}</span>
+            <Sun className="h-4 w-4" />
+            <span>{t('light')}</span>
           </div>
         </SelectItem>
       </SelectContent>

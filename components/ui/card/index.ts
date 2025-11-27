@@ -1,2 +1,0 @@
-// Card
-export * from './card'

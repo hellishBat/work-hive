@@ -1,9 +1,78 @@
 {
-  "title": "My Team",
-  "employeesList": "Employees List",
-  "tableCaption": "List of all synced employees",
-  "Role": {
-    "User": "User",
-    "Manager": "Manager"
+  "teamPage": {
+    "title": "My Team",
+    "employeesList": "Employees List",
+    "tableCaption": "List of all synced employees",
+    "loadError": "Failed to load team"
+  },
+  "table": {
+    "id": "ID",
+    "name": "Name",
+    "email": "Email",
+    "role": "Role",
+    "timetracker": "Timetracker",
+    "created": "Created",
+    "updated": "Updated",
+    "actions": "Actions"
+  },
+  "userActions": {
+    "create": {
+      "title": "Add a New Team Member",
+      "description": "Fill email and password to create a user",
+      "success": "User created successfully!",
+      "error": "Failed to create user. Please try again.",
+      "button": "Create",
+      "creating": "Creating...",
+      "alerts": {
+        "emailTaken": {
+          "title": "Email already used",
+          "description": "This email is already associated with another account."
+        }
+      }
+    },
+    "edit": {
+      "label": "Edit",
+      "title": "Edit User Details",
+      "saveButton": "Save Changes",
+      "description": "Update the user's name, email, or role",
+      "roleDescription": "Select a role for this user",
+      "success": "User updated successfully!",
+      "error": "Failed to update user. Please try again.",
+      "alerts": {
+        "emailLocked": {
+          "title": "Email cannot be changed",
+          "description": "This email address cannot be edited."
+        },
+        "emailTimetracker": {
+          "title": "Email cannot be changed",
+          "description": "The email cannot be changed because it is associated with a Screenshot Monitor / Scrin.io account."
+        }
+      }
+    },
+    "delete": {
+      "label": "Delete",
+      "title": "Confirm Deletion",
+      "button": "Delete",
+      "deleting": "Deleting...",
+      "success": "User {name} successfully deleted.",
+      "confirm": "Are you sure you want to delete user {name}? This action is irreversible.",
+      "error": "Failed to delete user. Please try again.",
+      "defaultUserNameFallback": "User"
+    }
+  },
+  "form": {
+    "email": "Email",
+    "password": "Password",
+    "generatePassword": "Generate Password",
+    "copyPassword": "Copy Password",
+    "passwordCopied": "Password copied!",
+    "fillAllFields": "Please fill in all fields",
+    "cancel": "Cancel"
+  },
+  "roles": {
+    "user": "User",
+    "manager": "Manager",
+    "admin": "Admin",
+    "owner": "Owner"
   }
 }

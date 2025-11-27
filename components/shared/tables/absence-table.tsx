@@ -10,7 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui'
-import { AbsenceChip } from './'
+import { AbsenceChip } from '..'
 
 // Define absence type
 type Absence = {

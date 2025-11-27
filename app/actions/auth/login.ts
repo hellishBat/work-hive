@@ -2,7 +2,7 @@
 'use server'
 
 import { redirect } from 'next/navigation'
-import { createServerSupabase } from '@/lib/supabase/server'
+import { createSupabaseServerAction } from '@/lib'
 
 /**
  * Authenticates user via Supabase email/password
@@ -16,7 +16,7 @@ export const loginAction = async (formData: FormData) => {
     return { error: 'Email and password are required' }
   }
 
-  const supabase = await createServerSupabase()
+  const supabase = await createSupabaseServerAction()
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password,

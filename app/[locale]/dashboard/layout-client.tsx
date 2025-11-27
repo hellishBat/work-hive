@@ -3,6 +3,7 @@
 
 import React, { useEffect } from 'react'
 import { Footer, Header, Sidebar } from '@/components/layout'
+import { Toaster } from '@/components/ui/sonner'
 import { useAuthStore } from '@/store/auth'
 
 interface Props {
@@ -12,10 +13,15 @@ interface Props {
 
 const DashboardLayoutClient = ({ children, profile }: Props) => {
   const setUser = useAuthStore((s) => s.setUser)
+  const setLoading = useAuthStore((s) => s.setLoading)
 
   useEffect(() => {
-    if (profile) setUser(profile)
-  }, [profile, setUser])
+    if (profile) {
+      setUser(profile)
+    }
+
+    setLoading(false)
+  }, [profile, setUser, setLoading])
 
   return (
     <div className="bg-background flex flex-1">
@@ -33,6 +39,7 @@ const DashboardLayoutClient = ({ children, profile }: Props) => {
           </div>
         )}
       </main>
+      <Toaster />
     </div>
   )
 }

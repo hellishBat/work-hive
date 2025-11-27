@@ -1,4 +1,4 @@
-// ESLint config for Next.js + Deno Edge Functions + Storybook
+// ESLint config for Next.js
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { FlatCompat } from '@eslint/eslintrc'

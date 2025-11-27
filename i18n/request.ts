@@ -1,5 +1,4 @@
-// Request
-
+// i18n Request
 import { getRequestConfig } from 'next-intl/server'
 import { loadMessages } from './load-messages'
 

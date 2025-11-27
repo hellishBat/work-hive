@@ -9,7 +9,7 @@ interface UserProfile {
   role?: string
   name?: string
   employee_id?: string
-  [key: string]: any
+  [key: string]: unknown
 }
 
 interface AuthState {

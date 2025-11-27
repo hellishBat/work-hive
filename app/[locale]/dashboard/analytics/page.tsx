@@ -2,9 +2,8 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { TeamChart } from '@/components/charts'
-import { SectionWrapper } from '@/components/layout'
-import { AbsenceTable } from '@/components/shared'
+import { Section } from '@/components/layout'
+import { AbsenceTable, TeamChart } from '@/components/shared'
 import { Card } from '@/components/ui'
 
 const absences = [
@@ -20,7 +19,7 @@ const workedHours = [
 const AnalyticsPage = () => {
   const t = useTranslations('Analytics')
   return (
-    <SectionWrapper title={t('title')}>
+    <Section title={t('title')}>
       <div className="space-y-6">
         {/* Absences Table */}
         <Card size="lg" title={t('teamAbsences')}>
@@ -43,7 +42,7 @@ const AnalyticsPage = () => {
           <TeamChart />
         </Card>
       </div>
-    </SectionWrapper>
+    </Section>
   )
 }
 

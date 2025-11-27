@@ -1,10 +1,10 @@
 // Action: Get the authenticated user's profile from Supabase
 'use server'
 
-import { createServerSupabase } from '@/lib/supabase/server'
+import { createSupabaseServerComponent } from '@/lib'
 
-export const getUserProfile = async () => {
-  const supabase = await createServerSupabase()
+export const getSessionUserProfile = async () => {
+  const supabase = await createSupabaseServerComponent()
   const {
     data: { user },
   } = await supabase.auth.getUser()

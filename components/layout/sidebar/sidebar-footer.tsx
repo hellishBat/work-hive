@@ -1,7 +1,7 @@
 // SidebarFooter
 'use client'
 
-import { NavUser } from './nav-user'
+import { SidebarUser } from './'
 
 interface SidebarFooterProps {
   collapsed: boolean
@@ -21,7 +21,7 @@ export const SidebarFooter: React.FC<SidebarFooterProps> = ({
 }) => {
   return (
     <div className="border-border flex justify-center border-t px-3 py-1.5">
-      <NavUser
+      <SidebarUser
         collapsed={collapsed}
         user={{
           name: profile?.name || 'Unknown',

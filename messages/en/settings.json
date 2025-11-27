@@ -1,16 +1,46 @@
 {
   "title": "Settings",
-  "username": "Username",
-  "email": "Email",
-  "theme": "Theme",
-  "themeSystem": "System",
-  "themeDark": "Dark",
-  "themeLight": "Light",
-  "saveSettings": "Save Settings",
-  "userProfile": "User Profile",
-  "interfaceSettings": "Interface Settings",
-  "language": "Language",
-  "language_en": "English",
-  "language_ru": "Russian",
-  "language_uk": "Ukrainian"
+  "profile": {
+    "title": "User Profile",
+    "description": "Update your personal information below.",
+    "loading": "Loading profile data...",
+    "notAuthenticated": "Profile data is not available. Please log in.",
+    "editButton": "Edit",
+    "editTitle": "Edit Profile",
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "noName": "No Name set",
+    "noEmail": "No Email available",
+    "save": "Save",
+    "saving": "Saving...",
+    "cancel": "Cancel",
+    "messages": {
+      "success": "Profile {name} successfully updated.",
+      "error": "Failed to update profile. Please try again."
+    },
+    "alerts": {
+      "title": "Discard unsaved changes?",
+      "description": "Your changes will be lost if you leave without saving. Are you sure you want to proceed?",
+      "stay": "Stay",
+      "leaveAnyway": "Leave Anyway"
+    }
+  },
+  "interface": {
+    "title": "Interface Settings",
+    "description": "Change language and theme preferences.",
+    "theme": "Theme",
+    "themeOptions": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System Default"
+    },
+    "themeDescription": "Select your preferred interface theme.",
+    "language": "Language",
+    "languageOptions": {
+      "en": "English",
+      "ru": "Russian",
+      "uk": "Ukrainian"
+    },
+    "languageDescription": "Select your preferred language."
+  }
 }

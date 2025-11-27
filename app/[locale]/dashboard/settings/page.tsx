@@ -1,94 +1,143 @@
 // Settings Page
 'use client'
 
-import { useState } from 'react'
-import { Mail, Save, User } from 'lucide-react'
+import { useEffect, useState, useTransition } from 'react'
 import { useTranslations } from 'next-intl'
-import { SectionWrapper } from '@/components/layout'
-import { LanguageSelect, ThemeSelect } from '@/components/shared'
+import { toast } from 'sonner'
+import { updateMyProfile } from '@/app/actions/profiles/update-my-profile'
+import { Section } from '@/components/layout'
+import { LanguageSelect, ThemeSelect, UserItem } from '@/components/shared'
 import {
-  Button,
   Card,
-  Input,
-  Label,
-  SelectGroup,
-  SelectLabel,
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemTitle,
 } from '@/components/ui'
+import { useAuthStore } from '@/store/auth'
 
-const SettingsPage = () => {
+export const SettingsPage = () => {
   const t = useTranslations('Settings')
-  const [username, setUsername] = useState('WorkHive User')
-  const [email, setEmail] = useState('user@workhive.com')
+  const tThemeOptions = (key: string) => t(`interface.themeOptions.${key}`)
+  const tLanguageOptions = (key: string) =>
+    t(`interface.languageOptions.${key}`)
+  const user = useAuthStore((s) => s.user)
+  const loading = useAuthStore((s) => s.loading)
+  const setUser = useAuthStore((s) => s.setUser)
 
-  const handleSave = () => alert(t('saveSettings'))
+  const [open, setOpen] = useState(false)
+  const [name, setName] = useState('')
+  const [isPending, startTransition] = useTransition()
+
+  useEffect(() => {
+    if (user) {
+      setName(user.name ?? '')
+    }
+  }, [user])
+
+  const handleSave = () => {
+    if (!user) return
+
+    startTransition(async () => {
+      try {
+        const updated = await updateMyProfile({ name })
+        setUser(updated)
+        setOpen(false)
+
+        // UPDATED: Use new message key
+        toast.success(t('profile.messages.success', { name: updated.name }))
+      } catch (err) {
+        console.error(err)
+        // UPDATED: Use new error key
+        toast.error(t('profile.messages.error'))
+      }
+    })
+  }
+
+  if (loading) {
+    return (
+      <Section title={t('title')}>
+        <p className="text-muted-foreground text-sm">{t('profile.loading')}</p>
+      </Section>
+    )
+  }
+
+  if (!user) {
+    return (
+      <Section title={t('title')}>
+        <p className="text-muted-foreground text-sm">
+          {t('profile.notAuthenticated')}
+        </p>
+      </Section>
+    )
+  }
 
   return (
-    <SectionWrapper title={t('title')}>
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        <Card size="lg" title={t('userProfile')}>
-          <div className="flex flex-col">
-            <div className="mb-4 flex flex-col gap-2">
-              <Label
-                htmlFor="username"
-                className="text-muted-foreground text-sm font-medium"
-              >
-                {t('username')}
-              </Label>
-              <div className="relative">
-                <User className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
-                <Input
-                  id="username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  className="bg-input text-foreground border-border rounded-[var(--radius)] pl-10"
-                  placeholder={t('username')}
-                />
-              </div>
-            </div>
-
-            <div className="mb-6 flex flex-col gap-2">
-              <Label
-                htmlFor="email"
-                className="text-muted-foreground text-sm font-medium"
-              >
-                {t('email')}
-              </Label>
-              <div className="relative">
-                <Mail className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
-                <Input
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="bg-input text-foreground border-border rounded-[var(--radius)] pl-10"
-                  placeholder={t('email')}
-                />
-              </div>
-            </div>
-
-            <Button
-              variant="default"
-              onClick={handleSave}
-              className="flex items-center gap-2"
-            >
-              <Save className="h-4 w-4" />
-              {t('saveSettings')}
-            </Button>
+    <Section title={t('title')}>
+      <div className="space-y-12">
+        {/* ------------------------- PROFILE SECTION ------------------------- */}
+        <div className="grid grid-cols-[400px_1fr] items-start gap-x-12 gap-y-6">
+          <div className="pr-4">
+            <h2 className="text-lg font-semibold">{t('profile.title')}</h2>
+            <p className="text-muted-foreground mt-1 text-sm">
+              {t('profile.description')}
+            </p>
           </div>
-        </Card>
-        <Card size="lg" title={t('interfaceSettings')}>
-          <div className="flex flex-col gap-4">
-            <SelectGroup>
-              <SelectLabel>{t('theme')}</SelectLabel>
-              <ThemeSelect />
-            </SelectGroup>
-            <SelectGroup>
-              <SelectLabel>{t('language')}</SelectLabel>
-              <LanguageSelect />
-            </SelectGroup>
+
+          <Card size="lg" className="flex flex-col gap-4 p-4">
+            <UserItem
+              user={user}
+              name={name}
+              setName={setName}
+              open={open}
+              setOpen={setOpen}
+              isPending={isPending}
+              loading={loading}
+              onSave={handleSave}
+            />
+          </Card>
+        </div>
+
+        {/* ------------------------ INTERFACE SECTION ------------------------ */}
+        <div className="grid grid-cols-[400px_1fr] items-start gap-x-12 gap-y-6">
+          <div className="pr-4">
+            <h2 className="text-lg font-semibold">{t('interface.title')}</h2>
+            <p className="text-muted-foreground mt-1 text-sm">
+              {t('interface.description')}
+            </p>
           </div>
-        </Card>
+
+          <Card size="lg" className="flex flex-col gap-4 p-4">
+            {/* Theme */}
+            <Item variant="outline">
+              <ItemContent>
+                <ItemTitle>{t('interface.theme')}</ItemTitle>
+                <ItemDescription>
+                  {t('interface.themeDescription')}
+                </ItemDescription>
+              </ItemContent>
+              <ItemActions>
+                <ThemeSelect t={tThemeOptions} />
+              </ItemActions>
+            </Item>
+
+            {/* Language */}
+            <Item variant="outline">
+              <ItemContent>
+                <ItemTitle>{t('interface.language')}</ItemTitle>
+                <ItemDescription>
+                  {t('interface.languageDescription')}
+                </ItemDescription>
+              </ItemContent>
+              <ItemActions>
+                <LanguageSelect t={tLanguageOptions} />
+              </ItemActions>
+            </Item>
+          </Card>
+        </div>
       </div>
-    </SectionWrapper>
+    </Section>
   )
 }
 

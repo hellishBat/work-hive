@@ -6,8 +6,9 @@ import * as Avatar from '@radix-ui/react-avatar'
 import { CalendarClock, CalendarPlus, Mail, Trash2 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useParams, useRouter } from 'next/navigation'
-import { deleteUser, getUserById } from '@/app/actions/team'
-import { SectionWrapper } from '@/components/layout'
+import { deleteUserProfile } from '@/app/actions/profiles/delete-user-profile'
+import { getUserById } from '@/app/actions/profiles/get-user-by-id'
+import { Section } from '@/components/layout'
 import { RoleChip, StatusChip } from '@/components/shared'
 import { Button, Card } from '@/components/ui'
 
@@ -47,7 +48,7 @@ const UserPage: React.FC = () => {
     if (!confirm('Are you sure you want to delete this user?')) return
     setDeleting(true)
     try {
-      await deleteUser(id)
+      await deleteUserProfile(id)
       router.push(`/${locale}/dashboard/team`)
     } catch (err) {
       console.error('Failed to delete user', err)
@@ -66,7 +67,7 @@ const UserPage: React.FC = () => {
     .toUpperCase()
 
   return (
-    <SectionWrapper title="Profile Details">
+    <Section title="Profile Details">
       <div className="grid grid-cols-1 pt-8 md:grid-cols-2 xl:grid-cols-3">
         <Card size="lg">
           <div className="flex flex-col gap-4">
@@ -132,7 +133,7 @@ const UserPage: React.FC = () => {
           </div>
         </Card>
       </div>
-    </SectionWrapper>
+    </Section>
   )
 }
 

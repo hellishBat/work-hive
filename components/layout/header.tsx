@@ -2,8 +2,8 @@
 'use client'
 
 import { Bell, BellDot } from 'lucide-react'
-import { SidebarCollapseButton } from '@/components/shared'
 import { Button } from '../ui'
+import { SidebarCollapseButton } from './sidebar'
 
 const Header = () => (
   <header className="text-muted-foreground border-border m-0 border-b p-4 pl-6 text-sm">

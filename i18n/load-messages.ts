@@ -1,4 +1,4 @@
-// LoadMessages
+// i18n LoadMessages
 import { routing } from './routing'
 
 export const loadMessages = async (

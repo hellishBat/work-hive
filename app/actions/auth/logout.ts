@@ -2,18 +2,18 @@
 'use server'
 
 import { redirect } from 'next/navigation'
-import { createServerSupabase } from '@/lib/supabase/server'
+import { createSupabaseServerAction } from '@/lib'
 
 /**
  * Logs out the current user and clears Supabase cookies.
  */
 export const logoutAction = async () => {
-  const supabase = await createServerSupabase()
+  const supabase = await createSupabaseServerAction()
   const { error } = await supabase.auth.signOut()
 
   if (error) {
     console.warn('Logout failed:', error.message)
   }
 
-  redirect('/login')
+  redirect('/')
 }

@@ -1,24 +1,24 @@
-// SectionWrapper
+// Section
 'use client'
 
 import { ReactNode } from 'react'
 import { cn } from '@/lib'
 
-interface SectionWrapperProps {
+interface SectionProps {
   title: string
   description?: string
   className?: string
   children: ReactNode
 }
 
-export const SectionWrapper = ({
+export const Section = ({
   title,
   description,
   className,
   children,
-}: SectionWrapperProps) => {
+}: SectionProps) => {
   return (
-    <section className={cn('p-6', className)}>
+    <section className={cn('m-0 px-6 pt-6 pb-12', className)}>
       <div className="container">
         <h2
           className={`text-primary text-3xl font-bold ${cn('mb-2', !description && 'mb-6')}`}
